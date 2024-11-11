@@ -1,11 +1,11 @@
-import { Facebook, Instagram, Mail, MapPin, Youtube } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import { Facebook, Instagram, Mail, MapPin, Youtube } from "lucide-react"
+import Link from "next/link"
+import { Button } from "../ui/button"
 
 export default function FooterComponent() {
 	return (
-		<footer className="row-start-3 flex flex-col gap-6 p-2 flex-wrap items-center justify-center w-full">
-			<div className="grid grid-cols-3 gap-32">
+		<footer className="row-start-3 flex flex-col gap-6 p-2 px-10 flex-wrap items-center justify-center w-full">
+			<div className="grid grid-cols-1 sm:grid-cols-3 gap-32 w-full">
 				<div className="flex flex-col gap-4 col-span-2">
 					<div className="flex gap-2">
 						<Mail />
@@ -23,9 +23,9 @@ export default function FooterComponent() {
 					</div>
 				</div>
 
-				<div>
+				<div className="w-full bg-red">
 					<p>Rede sociais:</p>
-					<div className="flex flex-row gap-4">
+					<div className="flex flex-row gap-4 w-full justify-start">
 						<Button variant="outline" asChild>
 							<Link
 								href="https://www.instagram.com/petengenhariaeletrica/"
@@ -50,9 +50,10 @@ export default function FooterComponent() {
 					</div>
 				</div>
 			</div>
-			<p className="text-xs">
+
+			<p className="text-xs text-center">
 				© {new Date().getFullYear()} - PET Elétrica UFSM
 			</p>
 		</footer>
-	);
+	)
 }

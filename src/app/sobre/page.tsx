@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"
 
 export default function Page() {
 	return (
@@ -11,7 +11,7 @@ export default function Page() {
 					height={1080}
 				/>
 			</header>
-			<main>
+			<main className="px-4">
 				<div>
 					<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
 						Sobre o PET
@@ -30,5 +30,5 @@ export default function Page() {
 				</div>
 			</main>
 		</>
-	);
+	)
 }
