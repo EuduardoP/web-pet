@@ -5,7 +5,7 @@ export default function Page() {
 		<>
 			<header>
 				<Image
-					src="https://placehold.co/1920x1080.png"
+					src="/1920x1080.png"
 					alt="File icon"
 					width={1920}
 					height={1080}
