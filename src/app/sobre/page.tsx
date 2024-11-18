@@ -3,21 +3,12 @@ import Image from "next/image"
 export default function Page() {
 	return (
 		<>
-			<header>
-				<Image
-					src="/1920x1080.png"
-					alt="File icon"
-					width={1920}
-					height={1080}
-				/>
-			</header>
-			<main className="px-4">
+			<main className="px-2">
+				<h2 className="scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0">
+					Sobre o PET
+				</h2>
 				<div>
-					<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-						Sobre o PET
-					</h2>
-
-					<p className="text-justify mt-2">
+					<p className="text-justify my-4">
 						O Programa de Educação Tutorial é um programa do Ministério da
 						Educação, desenvolvido por grupos de estudantes, com tutoria de um
 						docente, organizados a partir de formações em nível de graduação nas
@@ -28,6 +19,12 @@ export default function Page() {
 						professor tutor.
 					</p>
 				</div>
+				<Image
+					src="/all.jpg"
+					alt="Todos os membros do PET"
+					width={1840}
+					height={1035}
+				/>
 			</main>
 		</>
 	)

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 
 export default function FooterComponent() {
+	//https://www.notion.so/petee/e83706d771544092aa7f95bc8f5a84a6?v=fbad88243d0f45cba44eaca1e2a64669&pvs=4
 	return (
 		<footer className="row-start-3 flex flex-col gap-6 p-2 px-10 flex-wrap items-center justify-center w-full">
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-32 w-full">
