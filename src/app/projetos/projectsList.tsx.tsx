@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useSearchParams } from "next/navigation"
+import React, { Suspense } from "react"
 
 interface Project {
 	id: string
@@ -25,10 +26,8 @@ interface ProjectsListProps {
 	projects: Project[]
 }
 
-export default function ProjectsList({ projects }: ProjectsListProps) {
+const ProjectsListClient = ({ projects }: ProjectsListProps) => {
 	const searchParams = useSearchParams()
-	console.log(projects[6].properties.tipo)
-
 	const selectedCategory = searchParams.get("tipo") || ""
 
 	const handleCategoryChange = (category: string) => {
@@ -92,5 +91,13 @@ export default function ProjectsList({ projects }: ProjectsListProps) {
 				))}
 			</div>
 		</div>
+	)
+}
+
+export default function ProjectsList({ projects }: ProjectsListProps) {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ProjectsListClient projects={projects} />
+		</Suspense>
 	)
 }
