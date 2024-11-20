@@ -11,6 +11,7 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useSearchParams } from "next/navigation"
 import React, { Suspense } from "react"
+import { LoadingPage } from "./loadingPage"
 
 interface Project {
 	id: string
@@ -25,6 +26,7 @@ interface Project {
 interface ProjectsListProps {
 	projects: Project[]
 }
+const DEBUG_LOADING = false
 
 const ProjectsListClient = ({ projects }: ProjectsListProps) => {
 	const searchParams = useSearchParams()
@@ -51,9 +53,6 @@ const ProjectsListClient = ({ projects }: ProjectsListProps) => {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<h2 className="scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0">
-				Projetos do PET
-			</h2>
 			<ToggleGroup
 				type="single"
 				value={selectedCategory}
@@ -72,7 +71,7 @@ const ProjectsListClient = ({ projects }: ProjectsListProps) => {
 							<CardDescription>{project.properties.tipo}</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<p>{project.properties.descricao}</p>
+							<p className="text-justify">{project.properties.descricao}</p>
 						</CardContent>
 						<CardFooter>
 							<p>
@@ -96,8 +95,12 @@ const ProjectsListClient = ({ projects }: ProjectsListProps) => {
 
 export default function ProjectsList({ projects }: ProjectsListProps) {
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
-			<ProjectsListClient projects={projects} />
+		<Suspense fallback={<LoadingPage />}>
+			{DEBUG_LOADING ? (
+				<LoadingPage />
+			) : (
+				<ProjectsListClient projects={projects} />
+			)}
 		</Suspense>
 	)
 }

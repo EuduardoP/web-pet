@@ -43,7 +43,7 @@ export async function getProjectsData() {
 					id,
 					properties: {
 						title: properties.Name.title[0]?.plain_text || "",
-						lider: properties.Lider.people[0]?.name || "",
+						lider: properties.Lider.people[0]?.name || "Ninguém",
 						descricao: properties["Descrição "].rich_text[0]?.plain_text || "",
 						tipo: properties.Tipo.multi_select[0]?.name || "",
 					},

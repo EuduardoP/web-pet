@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getProjectsData } from "@/lib/get-projects-data"
 import { BookText, Search, Users } from "lucide-react"
-import ProjectsList from "./projectsList.tsx"
+import ProjectsList from "./projectsList"
 
 const category = [
 	{
@@ -56,6 +56,9 @@ export default async function Page() {
 					</Card>
 				))}
 			</main>
+			<h2 className="scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0">
+				Projetos do PET
+			</h2>
 			<ProjectsList projects={projects} />
 		</div>
 	)

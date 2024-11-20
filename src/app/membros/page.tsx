@@ -17,8 +17,10 @@ export default async function Page() {
 	const members = await getMembersData()
 	return (
 		<div>
-			<h1>Membros do PET</h1>
-			<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4">
+			<h2 className="scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0">
+				Membros do PET
+			</h2>
+			<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 mt-4">
 				{members
 					.sort((a, b) => a.properties.name.localeCompare(b.properties.name))
 					.map((member) => (
@@ -28,9 +30,9 @@ export default async function Page() {
 						>
 							<CardHeader
 								className={
-									"flex flex-col items-center data-[haveImage]:p-0 justify-center"
+									"flex flex-col items-center data-[have-image]:p-0 justify-center"
 								}
-								data-haveImage={member.properties.image ? "true" : undefined}
+								data-have-image={member.properties.image ? "true" : undefined}
 							>
 								{member.properties.image ? (
 									<Image
