@@ -9,6 +9,7 @@ interface Member {
 		image: string
 		lattes: string | null
 		linkedin: string | null
+		startDate: string | null
 	}
 }
 
@@ -21,9 +22,9 @@ export async function getMembersData(): Promise<Member[]> {
 		auth: process.env.NOTION_API_KEY,
 	})
 
-	const databaseId = process.env.NOTION_DATABASE_ID
+	const databaseId = process.env.NOTION_MEMBERS_DATABASE_ID
 	if (!databaseId) {
-		throw new Error("NOTION_DATABASE_ID is not defined")
+		throw new Error("NOTION_MEMBERS_DATABASE_ID is not defined")
 	}
 
 	try {
@@ -41,6 +42,7 @@ export async function getMembersData(): Promise<Member[]> {
 						status: properties.Status?.select?.name || "N/A",
 						lattes: properties.Lattes?.files?.[0]?.external?.url || null,
 						linkedin: properties.Linkedin?.files?.[0]?.external?.url || null,
+						startDate: properties["Data de entrada "]?.date?.start || null,
 						image: properties.Foto?.files?.[0]?.file?.url || "",
 					},
 				}

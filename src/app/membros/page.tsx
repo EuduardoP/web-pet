@@ -1,8 +1,16 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getMembersData } from "@/lib/get-data"
+import { Separator } from "@/components/ui/separator"
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { getMembersData } from "@/lib/get-members-data"
 import { File, Linkedin } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 export default async function Page() {
@@ -14,49 +22,99 @@ export default async function Page() {
 				{members
 					.sort((a, b) => a.properties.name.localeCompare(b.properties.name))
 					.map((member) => (
-						<Card key={member.id}>
-							<CardHeader className="flex flex-col items-center">
-								<Avatar key={member.id} className="w-24 h-24">
-									<AvatarImage
+						<Card
+							key={member.id}
+							className="transition-transform hover:scale-105"
+						>
+							<CardHeader
+								className={
+									"flex flex-col items-center data-[haveImage]:p-0 justify-center"
+								}
+								data-haveImage={member.properties.image ? "true" : undefined}
+							>
+								{member.properties.image ? (
+									<Image
 										src={member.properties.image}
 										alt={member.properties.name}
+										className="rounded-t-xl relative top-0 left-0 w-full h-full object-cover"
+										width={200}
+										height={200}
 									/>
-									<AvatarFallback>
-										{member.properties.name
-											.split(" ")
-											.slice(0, 2)
-											.map((word) => word.charAt(0).toUpperCase())
-											.join("")}
-									</AvatarFallback>
-								</Avatar>
+								) : (
+									<Avatar key={member.id} className="w-24 h-24">
+										<AvatarFallback>
+											{member.properties.name
+												.split(" ")
+												.filter(
+													(word) =>
+														!["de", "da", "do", "das", "dos", "e"].includes(
+															word.toLowerCase(),
+														),
+												)
+												.slice(0, 2)
+												.map((word) => word.charAt(0).toUpperCase())
+												.join("")}{" "}
+										</AvatarFallback>
+									</Avatar>
+								)}
+								<Separator />
 								<CardTitle>{member.properties.name}</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="flex flex-col gap-2">
 								<p>{member.properties.status}</p>
-								<div className="flex gap-2">
-									{member.properties.lattes && (
-										<Button asChild variant="outline" size="icon">
-											<Link
-												href={member.properties.lattes}
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												<File />
-											</Link>
-										</Button>
-									)}
-									{member.properties.linkedin && (
-										<Button asChild variant="outline" size="icon">
-											<Link
-												href={member.properties.linkedin}
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												<Linkedin />
-											</Link>
-										</Button>
-									)}
-								</div>
+								<TooltipProvider>
+									<div className="flex gap-2">
+										{member.properties.lattes && (
+											<Tooltip>
+												<TooltipTrigger asChild>
+													<Button asChild variant="outline" size="icon">
+														<Link
+															href={member.properties.lattes}
+															target="_blank"
+															rel="noopener noreferrer"
+														>
+															<File />
+														</Link>
+													</Button>
+												</TooltipTrigger>
+												<TooltipContent>
+													<p>Lattes</p>
+												</TooltipContent>
+											</Tooltip>
+										)}
+										{member.properties.linkedin && (
+											<Tooltip>
+												<TooltipTrigger asChild>
+													<Button asChild variant="outline" size="icon">
+														<Link
+															href={member.properties.linkedin}
+															target="_blank"
+															rel="noopener noreferrer"
+														>
+															<Linkedin />
+														</Link>
+													</Button>
+												</TooltipTrigger>
+												<TooltipContent>
+													<p>LinkedIn</p>
+												</TooltipContent>
+											</Tooltip>
+										)}
+									</div>
+								</TooltipProvider>
+								{member.properties.startDate && (
+									<p>
+										Entrou em:{" "}
+										{new Date(member.properties.startDate).toLocaleDateString(
+											"pt-BR",
+											{
+												day: "2-digit",
+												month: "2-digit",
+												year: "numeric",
+											},
+										)}
+									</p>
+								)}
 							</CardContent>
 						</Card>
 					))}
