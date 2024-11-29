@@ -10,7 +10,7 @@ export default async function Noticia({
 }: {
 	params: Promise<{ id: string }>
 }) {
-	const { id: newsId } = (await params).id
+	const newsId = (await params).id
 	const newsData = await getBlockNewsData(newsId)
 	const newssData = await getNewsData()
 	const user = await getUserData(newsData?.created_by)
