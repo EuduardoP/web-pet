@@ -1,4 +1,4 @@
-export interface Root {
+export interface RootNews {
 	results: Result[]
 	has_more: boolean
 	type: string

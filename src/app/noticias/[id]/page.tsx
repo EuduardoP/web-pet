@@ -3,7 +3,6 @@ import { getBlockNewsData } from "@/lib/get-block-news-data"
 import { getNewsData } from "@/lib/get-news-data"
 import { getUserData } from "@/lib/get-user-data"
 import { Dot } from "lucide-react"
-import type { Result } from "./types"
 
 export default async function Noticia({
 	params,
@@ -13,7 +12,7 @@ export default async function Noticia({
 	const newsId = (await params).id
 	const newsData = await getBlockNewsData(newsId)
 	const newssData = await getNewsData()
-	const user = await getUserData(newsData?.created_by)
+	const user = await getUserData(newsData?.created_by ?? "")
 	return (
 		<div className="flex flex-col w-full p-4">
 			<header>
@@ -41,20 +40,22 @@ export default async function Noticia({
 					</p>
 
 					<p>
-						{new Date(newsData?.created_time).toLocaleDateString("pt-BR", {
-							day: "numeric",
-							month: "numeric",
-							year: "numeric",
-						})}
+						{newsData?.created_time &&
+							new Date(newsData.created_time).toLocaleDateString("pt-BR", {
+								day: "numeric",
+								month: "numeric",
+								year: "numeric",
+							})}
 					</p>
 					<Dot />
 					<p>
-						Atualizado {calculateTimeDifference(newsData?.last_edited_time)}
+						Atualizado{" "}
+						{calculateTimeDifference(newsData?.last_edited_time ?? "")}
 					</p>
 				</small>
 			</header>
 			<main>
-				{newsData?.result.map((block: Result) => (
+				{newsData?.result.map((block) => (
 					<div key={block.id}>
 						{block.type === "paragraph" && block.paragraph && (
 							<p className="leading-7 [&:not(:first-child)]:mt-6">
