@@ -1,8 +1,8 @@
+import { Menu } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { ModeToggle } from "../theme-provider/modeToggle"
 import { Button } from "../ui/button"
-import { Menu } from "lucide-react"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -14,6 +14,10 @@ export default function HeaderComponent() {
 		{
 			name: "Início",
 			href: "/",
+		},
+		{
+			name: "Notícias",
+			href: "/noticias",
 		},
 		{
 			name: "O que é o PET?",

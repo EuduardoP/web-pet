@@ -39,7 +39,7 @@ export default function RootLayout({
 				>
 					<div className="w-full flex flex-col min-h-screen">
 						<HeaderComponent />
-						<main className="flex-grow w-full flex flex-col items-center pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+						<main className="flex-grow w-full flex flex-col items-center p-4 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
 							{children}
 						</main>
 						<FooterComponent />
