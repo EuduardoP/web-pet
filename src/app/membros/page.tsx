@@ -22,11 +22,25 @@ export default async function Page() {
 			</h2>
 			<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 mt-4">
 				{members
-					.sort((a, b) => a.properties.name.localeCompare(b.properties.name))
+					.sort((a, b) => {
+						if (
+							a.properties.status === "Tutor" &&
+							b.properties.status !== "Tutor"
+						) {
+							return -1
+						}
+						if (
+							a.properties.status !== "Tutor" &&
+							b.properties.status === "Tutor"
+						) {
+							return 1
+						}
+						return a.properties.name.localeCompare(b.properties.name)
+					})
 					.map((member) => (
 						<Card
-							key={member.id}
-							className="transition-transform hover:scale-105"
+							key={member.properties.id}
+							className="transition-transform hover:scale-105 h-auto w-64"
 						>
 							<CardHeader
 								className={
@@ -35,15 +49,14 @@ export default async function Page() {
 								data-have-image={member.properties.image ? "true" : undefined}
 							>
 								{member.properties.image ? (
-									<Image
+									<img
 										src={member.properties.image}
 										alt={member.properties.name}
-										className="rounded-t-xl relative top-0 left-0 w-full h-full object-cover"
-										width={200}
-										height={200}
+										className="rounded-t-xl w-full h-full object-cover"
+										loading="lazy"
 									/>
 								) : (
-									<Avatar key={member.id} className="w-24 h-24">
+									<Avatar key={member.properties.id} className="w-24 h-24">
 										<AvatarFallback>
 											{member.properties.name
 												.split(" ")

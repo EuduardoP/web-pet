@@ -2,8 +2,8 @@ import type { Result } from "@/app/membros/types"
 import { Client } from "@notionhq/client"
 
 interface Member {
-	id: string
 	properties: {
+		id: string
 		name: string
 		status: string
 		image: string
@@ -30,14 +30,21 @@ export async function getMembersData(): Promise<Member[]> {
 	try {
 		const response = await notion.databases.query({
 			database_id: databaseId,
+			filter: {
+				property: "Status",
+				select: {
+					does_not_equal: "Ex-Petiano",
+				},
+			},
 		})
+		console.log(response)
 		const formatData = (data: Result[]): Member[] => {
 			return data.map((item) => {
-				const { id, properties } = item
+				const { properties } = item
 
 				return {
-					id,
 					properties: {
+						id: properties["E-mail Notion"].id,
 						name: properties.Name?.title[0]?.plain_text || "N/A",
 						status: properties.Status?.select?.name || "N/A",
 						lattes: properties.Lattes?.files?.[0]?.external?.url || null,

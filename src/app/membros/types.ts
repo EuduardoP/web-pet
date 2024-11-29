@@ -4,17 +4,27 @@ export interface Root {
 }
 
 export interface Result {
-	id: string
 	properties: Properties
 }
 
 export interface Properties {
+	"E-mail Notion": EmailNotion
 	"Data de entrada ": DataDeEntrada
 	Lattes?: Curriculo
 	Linkedin?: Curriculo
 	Foto?: Foto
 	Status: Status
 	Name: Name
+}
+
+export interface EmailNotion {
+	id: string
+	people: People
+	type: string
+}
+
+export interface People {
+	id: string
 }
 
 export interface Foto {
