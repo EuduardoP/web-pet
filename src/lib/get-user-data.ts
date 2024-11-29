@@ -1,4 +1,3 @@
-import type { Result } from "@/app/projetos/types"
 import { Client } from "@notionhq/client"
 
 export async function getUserData(userId: string) {

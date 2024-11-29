@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/tooltip"
 import { getMembersData } from "@/lib/get-members-data"
 import { File, Linkedin } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 
 export default async function Page() {

@@ -1,4 +1,4 @@
-const { Client } = require("@notionhq/client")
+import { Client } from "@notionhq/client"
 
 export async function getBlockNewsData(blockId: string) {
 	if (!process.env.NOTION_API_KEY) {
@@ -16,7 +16,7 @@ export async function getBlockNewsData(blockId: string) {
 		const title = response.child_page.title
 		const last_edited_time = response.last_edited_time
 		const created_by = response.created_by.id
-    const created_time = response.created_time
+		const created_time = response.created_time
 		return { title, result, last_edited_time, created_by, created_time }
 	} catch (error) {
 		console.error("Error appending block:", error)
