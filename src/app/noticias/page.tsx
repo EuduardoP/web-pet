@@ -14,7 +14,7 @@ import { Dot, ListFilter } from "lucide-react"
 import { unstable_cache } from "next/cache"
 import Link from "next/link"
 
-export const getNews = unstable_cache(
+const getNews = unstable_cache(
 	async () => {
 		const response = await getNewsData()
 		console.log(
