@@ -30,7 +30,5 @@ export async function getBlockNewsData(blockId: string) {
 		const created_by = response.created_by.id
 		const created_time = response.created_time
 		return { title, result, last_edited_time, created_by, created_time }
-	} catch (error) {
-		console.error("Error appending block:", error)
-	}
+	} catch (error) {}
 }

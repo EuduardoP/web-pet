@@ -54,7 +54,7 @@ export default async function Noticia({
 					</p>
 				</small>
 			</header>
-			<main>
+			<main className="flex flex-col gap-10">
 				{newsData?.result.map((block) => (
 					<div key={block.id}>
 						{block.type === "paragraph" && block.paragraph && (
@@ -87,6 +87,13 @@ export default async function Noticia({
 							<blockquote className="m-6 border-l-2 pl-6 italic">
 								{block.callout.rich_text[0].plain_text}
 							</blockquote>
+						)}
+						{block.type === "image" && block.image && (
+							<img
+								src={block.image.file.url}
+								alt={block.image.caption.plain_text ?? ""}
+								className="rounded-xl object-cover mb-4 size-min"
+							/>
 						)}
 					</div>
 				))}

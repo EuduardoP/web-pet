@@ -13,6 +13,11 @@ export interface Result {
 export interface Cover {
 	type: string
 	external: External
+	file: Filetype
+}
+
+export interface Filetype {
+	url: string
 }
 
 export interface External {

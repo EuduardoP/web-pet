@@ -23,6 +23,7 @@ export interface Result {
 	bulleted_list_item?: BulletedListItem
 	heading_3?: Heading3
 	callout?: Callout
+	image?: Image
 }
 
 export interface Parent {
@@ -38,6 +39,21 @@ export interface CreatedBy {
 export interface LastEditedBy {
 	object: string
 	id: string
+}
+
+export interface Image {
+	type: string
+	file: File
+	caption: Caption
+}
+
+export interface Caption {
+	text: Text
+	plain_text: string
+}
+export interface File {
+	url: string
+	expiry_time: string
 }
 
 export interface Heading1 {

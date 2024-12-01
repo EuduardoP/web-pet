@@ -1,7 +1,7 @@
 import type { Result } from "@/app/noticias/types"
 import { Client } from "@notionhq/client"
 
-interface News {
+export interface News {
 	id: string
 	created_time: string
 	last_edited_time: string
@@ -34,10 +34,9 @@ export async function getNewsData() {
 		const formatData = (data: Result[]): News[] => {
 			return data.map((item) => {
 				const { id, cover, created_time, last_edited_time, properties } = item
-
 				return {
 					id,
-					cover: cover?.external?.url || "",
+					cover: cover?.external?.url || cover?.file?.url || "",
 					created_time,
 					last_edited_time,
 					properties: {
