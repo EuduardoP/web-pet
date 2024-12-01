@@ -5,7 +5,7 @@ export async function GET() {
 	try {
 		const news = await getNewsData()
 		return NextResponse.json(news)
-	} catch (error) {
+	} catch {
 		return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 })
 	}
 }
