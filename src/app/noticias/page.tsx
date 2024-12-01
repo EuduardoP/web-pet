@@ -1,5 +1,3 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,22 +9,24 @@ import {
 	CardTitle,
 } from "@/components/ui/card"
 import { calculateTimeDifference } from "@/function/calculate-time-difference"
-import type { News } from "@/lib/get-news-data"
-import { useQuery } from "@tanstack/react-query"
+import { getNewsData } from "@/lib/get-news-data"
 import { Dot, ListFilter } from "lucide-react"
+import { unstable_cache } from "next/cache"
 import Link from "next/link"
 
-export default function Noticias() {
-	const { data: news } = useQuery<News[]>({
-		queryKey: ["news"],
-		queryFn: async () => {
-			const response = await fetch("/api/news")
-			if (!response.ok) {
-				throw new Error("Network response was not ok")
-			}
-			return response.json()
-		},
-	})
+const getNews = unstable_cache(
+	async () => {
+		return await getNewsData()
+	},
+	["news"],
+	{
+		revalidate: 60 * 60 * 1, // 1 horas
+		tags: ["news"],
+	},
+)
+
+export default async function Noticias() {
+	const news = await getNews()
 	return (
 		<div className="flex flex-col w-full">
 			<h2 className="flex scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0 justify-between">

@@ -3,6 +3,29 @@ import { getBlockNewsData } from "@/lib/get-block-news-data"
 import { getNewsData } from "@/lib/get-news-data"
 import { getUserData } from "@/lib/get-user-data"
 import { Dot } from "lucide-react"
+import { unstable_cache } from "next/cache"
+
+const getNews = unstable_cache(
+	async () => {
+		return await getNewsData()
+	},
+	["news"],
+	{
+		revalidate: 60 * 60 * 1, // 1 horas
+		tags: ["news"],
+	},
+)
+
+const getBlockNews = unstable_cache(
+	async (id: string) => {
+		return await getBlockNewsData(id)
+	},
+	["blockNews"],
+	{
+		revalidate: 60 * 60 * 1, // 1 horas
+		tags: ["blockNews"],
+	},
+)
 
 export default async function Noticia({
 	params,
@@ -10,19 +33,19 @@ export default async function Noticia({
 	params: Promise<{ id: string }>
 }) {
 	const newsId = (await params).id
-	const newsData = await getBlockNewsData(newsId)
-	const newssData = await getNewsData()
-	const user = await getUserData(newsData?.created_by ?? "")
+	const blockData = await getBlockNews(newsId)
+	const newsData = await getNews()
+	const user = await getUserData(blockData?.created_by ?? "")
 	return (
 		<div className="flex flex-col w-full p-4">
 			<header>
 				<img
 					alt="Imagem da notícia"
-					src={newssData.find((item) => item.id === newsId)?.cover}
+					src={newsData.find((item) => item.id === newsId)?.cover}
 					className="w-full h-64 rounded-xl object-cover mb-4"
 				/>
 				<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-1">
-					{newsData?.title}
+					{blockData?.title}
 				</h1>
 				<small className="flex items-center text-muted-foreground gap-2 text-sm font-medium leading-none mb-10 mr-2">
 					<p>
@@ -40,8 +63,8 @@ export default async function Noticia({
 					</p>
 
 					<p>
-						{newsData?.created_time &&
-							new Date(newsData.created_time).toLocaleDateString("pt-BR", {
+						{blockData?.created_time &&
+							new Date(blockData.created_time).toLocaleDateString("pt-BR", {
 								day: "numeric",
 								month: "numeric",
 								year: "numeric",
@@ -50,12 +73,12 @@ export default async function Noticia({
 					<Dot />
 					<p>
 						Atualizado{" "}
-						{calculateTimeDifference(newsData?.last_edited_time ?? "")}
+						{calculateTimeDifference(blockData?.last_edited_time ?? "")}
 					</p>
 				</small>
 			</header>
 			<main className="flex flex-col gap-10">
-				{newsData?.result.map((block) => (
+				{blockData?.result.map((block) => (
 					<div key={block.id}>
 						{block.type === "paragraph" && block.paragraph && (
 							<p className="leading-7 [&:not(:first-child)]:mt-6">
@@ -79,12 +102,12 @@ export default async function Noticia({
 						)}
 						{block.type === "bulleted_list_item" &&
 							block.bulleted_list_item && (
-								<ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+								<ul className="my-2 list-disc [&>li]:mt-2">
 									<li>{block.bulleted_list_item.rich_text[0].plain_text}</li>
 								</ul>
 							)}
 						{block.type === "callout" && block.callout && (
-							<blockquote className="m-6 border-l-2 pl-6 italic">
+							<blockquote className="m-6 border-l-2 italic">
 								{block.callout.rich_text[0].plain_text}
 							</blockquote>
 						)}

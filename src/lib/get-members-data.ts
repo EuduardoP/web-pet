@@ -1,7 +1,7 @@
 import type { Result } from "@/app/membros/types"
 import { Client } from "@notionhq/client"
 
-interface Member {
+export interface Member {
 	properties: {
 		id: string
 		name: string

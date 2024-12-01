@@ -9,11 +9,23 @@ import {
 } from "@/components/ui/tooltip"
 import { getMembersData } from "@/lib/get-members-data"
 import { File, Linkedin } from "lucide-react"
+import { unstable_cache } from "next/cache"
 import Link from "next/link"
 import { MemberImage } from "./memberImage"
 
+const getMembers = unstable_cache(
+	async () => {
+		return await getMembersData()
+	},
+	["members"],
+	{
+		revalidate: 60 * 60 * 4, // 4 horas
+		tags: ["members"],
+	},
+)
+
 export default async function Page() {
-	const members = await getMembersData()
+	const members = await getMembers()
 	return (
 		<div>
 			<h2 className="scroll-m-20 pb-2 border-b text-3xl font-semibold tracking-tight first:mt-0">

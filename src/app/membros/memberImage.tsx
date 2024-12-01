@@ -1,7 +1,6 @@
-"use client"
-
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { useQuery } from "@tanstack/react-query"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Suspense } from "react"
 
 interface MemberImageProps {
 	imageUrl: string | null
@@ -10,19 +9,7 @@ interface MemberImageProps {
 }
 
 export function MemberImage({ imageUrl, name, className }: MemberImageProps) {
-	const { data: imageData, isError } = useQuery({
-		queryKey: ["memberImage", imageUrl],
-		queryFn: async () => {
-			if (!imageUrl) return null
-			const response = await fetch(imageUrl)
-			if (!response.ok) throw new Error("Failed to fetch image")
-			return response.url
-		},
-		enabled: !!imageUrl,
-		staleTime: 4 * 60 * 60 * 1000, // 4 horas
-	})
-
-	if (isError || !imageData) {
+	if (!imageUrl) {
 		return (
 			<Avatar className="w-24 h-24">
 				<AvatarFallback>
@@ -43,11 +30,13 @@ export function MemberImage({ imageUrl, name, className }: MemberImageProps) {
 	}
 
 	return (
-		<img
-			src={imageData}
-			alt={name}
-			className={`rounded-t-xl w-full h-full object-cover ${className}`}
-			loading="lazy"
-		/>
+		<Suspense fallback={<Skeleton className="h-auto w-64" />}>
+			<img
+				src={imageUrl}
+				alt={name}
+				className={`rounded-t-xl w-full h-full object-cover ${className}`}
+				loading="lazy"
+			/>
+		</Suspense>
 	)
 }
