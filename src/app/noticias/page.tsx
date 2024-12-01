@@ -14,9 +14,14 @@ import { Dot, ListFilter } from "lucide-react"
 import { unstable_cache } from "next/cache"
 import Link from "next/link"
 
-const getNews = unstable_cache(
+export const getNews = unstable_cache(
 	async () => {
-		return await getNewsData()
+		const response = await getNewsData()
+		console.log(
+			"Revalidando valores...",
+			response.map((news) => news.properties.title),
+		)
+		return response
 	},
 	["news"],
 	{

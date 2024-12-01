@@ -47,7 +47,7 @@ export default function HeaderComponent() {
 				height={150}
 			/>
 			<div className="flex items-center gap-6">
-				<div className="flex items-center md:hidden">
+				<div className="flex items-center lg:hidden">
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="ghost" size="icon">
@@ -65,7 +65,7 @@ export default function HeaderComponent() {
 					<ModeToggle />
 				</div>
 
-				<nav className="hidden md:flex gap-6">
+				<nav className="hidden lg:flex gap-6">
 					{navBar.map((item) =>
 						item.external ? (
 							<Button variant="link" asChild key={item.name}>
@@ -81,7 +81,7 @@ export default function HeaderComponent() {
 					)}
 				</nav>
 
-				<div className="hidden md:block">
+				<div className="hidden lg:block">
 					<ModeToggle />
 				</div>
 			</div>

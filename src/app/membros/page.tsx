@@ -15,15 +15,20 @@ import { MemberImage } from "./memberImage"
 
 const getMembers = unstable_cache(
 	async () => {
-		return await getMembersData()
+		const response = await getMembersData()
+		console.log(
+			"Revalidando dados...",
+			new Date().toLocaleString(), // Adicionado para mostrar a data e hora da última revalidação
+			response.map((member) => member.properties.image), // Corrigido para retornar o nome do membro
+		)
+		return response
 	},
 	["members"],
 	{
-		revalidate: 60 * 60 * 4, // 4 horas
+		revalidate: 60 * 60 * 1, // 1 minuto
 		tags: ["members"],
 	},
 )
-
 export default async function Page() {
 	const members = await getMembers()
 	return (
