@@ -37,7 +37,6 @@ export async function getMembersData(): Promise<Member[]> {
 				},
 			},
 		})
-		console.log(response)
 		const formatData = (data: Result[]): Member[] => {
 			return data.map((item) => {
 				const { properties } = item

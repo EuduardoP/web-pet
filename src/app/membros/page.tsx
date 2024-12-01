@@ -38,7 +38,7 @@ export default async function Page() {
 					})
 					.map((member) => (
 						<Card
-							key={member.properties.id}
+							key={member.properties.name}
 							className="transition-transform hover:scale-105 h-auto w-64"
 						>
 							<CardHeader

@@ -70,7 +70,21 @@ export default async function Noticias() {
 										</CardDescription>
 									</CardHeader>
 									<CardContent>{item.properties.resumo}</CardContent>
-									<CardFooter>Autor: {item.properties.author}</CardFooter>
+									<CardFooter>
+										Autor:{" "}
+										{item.properties.author
+											?.split(" ")
+											.map((word: string) => {
+												if (["de", "da", "do"].includes(word.toLowerCase())) {
+													return word.toLowerCase()
+												}
+												return (
+													word.charAt(0).toUpperCase() +
+													word.slice(1).toLowerCase()
+												)
+											})
+											.join(" ")}
+									</CardFooter>
 								</Card>
 							</Link>
 						))

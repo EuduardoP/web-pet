@@ -19,7 +19,7 @@ export function MemberImage({ imageUrl, name, className }: MemberImageProps) {
 			return response.url
 		},
 		enabled: !!imageUrl,
-		staleTime: 55 * 60 * 1000, // 55 minutos
+		staleTime: 4 * 60 * 60 * 1000, // 4 horas
 	})
 
 	if (isError || !imageData) {
