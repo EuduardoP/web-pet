@@ -24,7 +24,6 @@ export async function getBlockNewsData(blockId: string) {
 		const children = (await notion.blocks.children.list({
 			block_id: blockId,
 		})) as unknown as RootNews
-		console.log(response, children)
 		const result = children.results
 		const title = response.child_page.title
 		const last_edited_time = response.last_edited_time

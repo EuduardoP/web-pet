@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -11,6 +10,7 @@ import {
 import { getMembersData } from "@/lib/get-members-data"
 import { File, Linkedin } from "lucide-react"
 import Link from "next/link"
+import { MemberImage } from "./memberImage"
 
 export default async function Page() {
 	const members = await getMembersData()
@@ -47,30 +47,10 @@ export default async function Page() {
 								}
 								data-have-image={member.properties.image ? "true" : undefined}
 							>
-								{member.properties.image ? (
-									<img
-										src={member.properties.image}
-										alt={member.properties.name}
-										className="rounded-t-xl w-full h-full object-cover"
-										loading="lazy"
-									/>
-								) : (
-									<Avatar key={member.properties.id} className="w-24 h-24">
-										<AvatarFallback>
-											{member.properties.name
-												.split(" ")
-												.filter(
-													(word) =>
-														!["de", "da", "do", "das", "dos", "e"].includes(
-															word.toLowerCase(),
-														),
-												)
-												.slice(0, 2)
-												.map((word) => word.charAt(0).toUpperCase())
-												.join("")}{" "}
-										</AvatarFallback>
-									</Avatar>
-								)}
+								<MemberImage
+									imageUrl={member.properties.image}
+									name={member.properties.name}
+								/>
 								<Separator />
 								<CardTitle>{member.properties.name}</CardTitle>
 							</CardHeader>
