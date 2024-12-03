@@ -3,31 +3,6 @@ import { getBlockNewsData } from "@/lib/get-block-news-data"
 import { getNewsData } from "@/lib/get-news-data"
 import { getUserData } from "@/lib/get-user-data"
 import { Dot } from "lucide-react"
-import { unstable_cache } from "next/cache"
-
-const getNews = unstable_cache(
-	async () => {
-		const response = await getNewsData()
-		console.log("Revalidando valores...")
-		return response
-	},
-	["news"],
-	{
-		revalidate: 60 * 60 * 1, // 1 horas
-		tags: ["news"],
-	},
-)
-
-const getBlockNews = unstable_cache(
-	async (id: string) => {
-		return await getBlockNewsData(id)
-	},
-	["blockNews"],
-	{
-		revalidate: 60 * 60 * 1, // 1 horas
-		tags: ["blockNews"],
-	},
-)
 
 export default async function Noticia({
 	params,
@@ -35,8 +10,8 @@ export default async function Noticia({
 	params: Promise<{ id: string }>
 }) {
 	const newsId = (await params).id
-	const blockData = await getBlockNews(newsId)
-	const newsData = await getNews()
+	const blockData = await getBlockNewsData(newsId)
+	const newsData = await getNewsData()
 	const user = await getUserData(blockData?.created_by ?? "")
 	return (
 		<div className="flex flex-col w-full p-4">
