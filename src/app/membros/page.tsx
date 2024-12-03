@@ -25,7 +25,7 @@ const getMembers = unstable_cache(
 	},
 	["members"],
 	{
-		revalidate: 60 * 60 * 1, // 1 minuto
+		revalidate: 60 * 1, // 1 minuto
 		tags: ["members"],
 	},
 )
