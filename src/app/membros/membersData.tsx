@@ -20,15 +20,25 @@ interface MembersDataProps {
 }
 
 export function MembersData({ data: members }: MembersDataProps) {
-	const { data }: { data: Member[] } = useQuery({
+	const { data, isLoading } = useQuery<Member[]>({
 		queryKey: ["membersData"],
 		queryFn: async () => {
 			const response = await fetch("/api/members")
 			if (!response.ok) throw new Error("Failed to fetch members")
+			if (response.status === 200) {
+				console.log("Dados dos membros atualizados")
+			}
 			return response.json()
 		},
+		initialDataUpdatedAt: 0,
 		staleTime: 1 * 60 * 60 * 1000, // 1 horas
-		initialData: members,
+		initialData: members.map((member) => ({
+			...member,
+			properties: {
+				...member.properties,
+				image: null,
+			},
+		})),
 	})
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 mt-4">
@@ -62,6 +72,7 @@ export function MembersData({ data: members }: MembersDataProps) {
 							<MemberImage
 								imageUrl={member.properties.image}
 								name={member.properties.name}
+								isLoading={isLoading}
 							/>
 							<Separator />
 							<CardTitle>{member.properties.name}</CardTitle>

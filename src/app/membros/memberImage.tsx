@@ -6,10 +6,16 @@ interface MemberImageProps {
 	imageUrl: string | null
 	name: string
 	className?: string
+	isLoading: boolean
 }
 
-export function MemberImage({ imageUrl, name, className }: MemberImageProps) {
-	if (!imageUrl) {
+export function MemberImage({
+	imageUrl,
+	name,
+	isLoading,
+	className,
+}: MemberImageProps) {
+	if (!imageUrl || isLoading) {
 		return (
 			<Avatar className="w-24 h-24">
 				<AvatarFallback>

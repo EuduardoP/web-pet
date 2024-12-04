@@ -6,7 +6,7 @@ export interface Member {
 		id: string
 		name: string
 		status: string
-		image: string
+		image: string | null
 		lattes: string | null
 		linkedin: string | null
 		startDate: string | null

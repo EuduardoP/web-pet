@@ -25,6 +25,9 @@ export function NewsData({ data: news }: NewsDataProps) {
 		queryFn: async () => {
 			const response = await fetch("/api/news")
 			if (!response.ok) throw new Error("Failed to fetch members")
+			if (response.status === 200) {
+				console.log("Notícias atualizados")
+			}
 			return response.json()
 		},
 		staleTime: 1 * 60 * 60 * 1000, // 1 horas
