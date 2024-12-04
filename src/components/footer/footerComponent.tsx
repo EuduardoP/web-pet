@@ -4,7 +4,7 @@ import { Button } from "../ui/button"
 
 export default function FooterComponent() {
 	return (
-		<footer className="row-start-3 flex flex-col gap-6 p-2 px-10 flex-wrap items-center justify-center w-full">
+		<footer className="bg-muted row-start-3 flex flex-col gap-6 p-2 px-10 flex-wrap items-center justify-center w-full">
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-32 w-full">
 				<div className="w-full bg-red lg:order-2">
 					<p>Rede sociais:</p>

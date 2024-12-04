@@ -18,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
 	title: "PET Elétrica UFSM",
-	description: "site oficiall do PET Elétrica UFSM",
+	description: "site oficial do PET Elétrica UFSM",
 }
 
 export default function RootLayout({
