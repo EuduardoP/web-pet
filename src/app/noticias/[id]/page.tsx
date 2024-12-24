@@ -26,7 +26,7 @@ export default async function Noticia({
 				<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-1">
 					{blockData?.title}
 				</h1>
-				<small className="flex items-center text-muted-foreground gap-2 text-sm font-medium leading-none mb-10 mr-2">
+				<small className="flex items-center text-muted-foreground gap-2 text-sm font-medium leading-none mb-10 mr-2 text-justify">
 					<p>
 						{user?.name
 							?.split(" ")
@@ -71,32 +71,32 @@ export default async function Noticia({
 					return (
 						<div key={block.id}>
 							{block.type === "paragraph" && richText && (
-								<p className="leading-7 [&:not(:first-child)]:mt-6">
+								<p className="leading-7 [&:not(:first-child)]:mt-6 text-justify">
 									{richText}
 								</p>
 							)}
 							{block.type === "heading_1" && richText && (
-								<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl first:mt-0 mt-4">
+								<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl first:mt-0 mt-4 text-center">
 									{richText}
 								</h1>
 							)}
 							{block.type === "heading_2" && richText && (
-								<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-4">
+								<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-4 text-justify">
 									{richText}
 								</h2>
 							)}
 							{block.type === "heading_3" && richText && (
-								<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0 mt-4">
+								<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0 mt-4 text-justify">
 									{richText}
 								</h3>
 							)}
 							{block.type === "bulleted_list_item" && richText && (
 								<ul className="my-2 list-disc [&>li]:mt-2">
-									<li>{richText}</li>
+									<li className="text-justify">{richText}</li>
 								</ul>
 							)}
 							{block.type === "callout" && richText && (
-								<blockquote className="m-6 border-l-4 italic">
+								<blockquote className="m-6 border-l-4 italic text-justify">
 									{richText}
 								</blockquote>
 							)}
@@ -110,11 +110,17 @@ export default async function Noticia({
 								/>
 							)}
 							{block.type === "file" && block.file?.file?.url && (
-								<div className="border-l-4">
+								<div className="border-l-4 wrap truncate">
 									<Button variant="link" asChild>
-										<Link href={block.file.file.url}>
+										<Link
+											href={block.file.file.url}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
 											<FileText />
-											{block.file.name}
+											<span className="truncate text-justify">
+												{block.file.name}
+											</span>
 										</Link>
 									</Button>
 								</div>

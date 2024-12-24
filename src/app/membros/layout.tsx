@@ -1,17 +1,14 @@
-"use client"
-import { queryClient } from "@/lib/queryClient"
-import { QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: "Membros - PET Elétrica UFSM",
+	description: "Página oficial do PET Engenharia Elétrica da UFSM",
+}
 
 export default function MembrosLayout({
 	children,
 }: {
 	children: React.ReactNode
 }) {
-	return (
-		<QueryClientProvider client={queryClient}>
-			{children}
-			<ReactQueryDevtools initialIsOpen={false} />
-		</QueryClientProvider>
-	)
+	return <>{children}</>
 }

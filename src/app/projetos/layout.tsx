@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Notícias - PET Elétrica UFSM",
+	title: "Projetos - PET Elétrica UFSM",
 	description: "Página oficial do PET Engenharia Elétrica da UFSM",
 }
 

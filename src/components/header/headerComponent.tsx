@@ -39,13 +39,15 @@ export default function HeaderComponent() {
 	]
 	return (
 		<header className="sticky top-0 z-50 flex items-center gap-6 p-4 justify-between h-full w-full border-b border-zinc-400 bg-teal-300/30 backdrop-blur-sm">
-			<Image
-				aria-hidden
-				src="/logo.png"
-				alt="File icon"
-				width={150}
-				height={150}
-			/>
+			<Link href="/">
+				<Image
+					aria-hidden
+					src="/logo.png"
+					alt="File icon"
+					width={150}
+					height={150}
+				/>
+			</Link>
 			<div className="flex items-center gap-6">
 				<div className="flex items-center lg:hidden">
 					<DropdownMenu>
