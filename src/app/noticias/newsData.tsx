@@ -31,6 +31,7 @@ export function NewsData({ data: news }: NewsDataProps) {
 			return response.json()
 		},
 		staleTime: 1 * 60 * 60 * 1000, // 1 horas
+		initialDataUpdatedAt: 0,
 		initialData: news,
 	})
 

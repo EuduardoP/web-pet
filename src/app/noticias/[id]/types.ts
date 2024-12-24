@@ -24,6 +24,7 @@ export interface Result {
 	heading_3?: Heading3
 	callout?: Callout
 	image?: Image
+	file?: File
 }
 
 export interface Parent {
@@ -41,17 +42,44 @@ export interface LastEditedBy {
 	id: string
 }
 
-export interface Image {
+export interface File {
 	type: string
-	file: File
-	caption: Caption
+	file: File2
+	name: string
+}
+
+export interface File2 {
+	url: string
+	expiry_time: string
+}
+
+export interface Image {
+	caption: Caption[]
+	type: string
+	file: File3
 }
 
 export interface Caption {
-	text: Text
+	type: string
+	text: Text3
+	annotations: Annotations3
 	plain_text: string
 }
-export interface File {
+
+export interface Text3 {
+	content: string
+}
+
+export interface Annotations3 {
+	bold: boolean
+	italic: boolean
+	strikethrough: boolean
+	underline: boolean
+	code: boolean
+	color: string
+}
+
+export interface File3 {
 	url: string
 	expiry_time: string
 }
