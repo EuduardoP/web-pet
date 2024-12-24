@@ -3,7 +3,7 @@ import { calculateTimeDifference } from "@/function/calculate-time-difference"
 import { getBlockNewsData } from "@/lib/get-block-news-data"
 import { getNewsData } from "@/lib/get-news-data"
 import { getUserData } from "@/lib/get-user-data"
-import { Dot, FileDown, FileText } from "lucide-react"
+import { Dot, FileText } from "lucide-react"
 import Link from "next/link"
 
 export default async function Noticia({

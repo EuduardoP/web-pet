@@ -14,9 +14,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel"
-import { type News, getNewsData } from "@/lib/get-news-data"
-import { useQuery } from "@tanstack/react-query"
-import { Dot } from "lucide-react"
+import { getNewsData } from "@/lib/get-news-data"
 import Link from "next/link"
 
 export default async function Home() {
