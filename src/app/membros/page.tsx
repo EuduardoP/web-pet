@@ -1,6 +1,9 @@
 import { getMembersData } from "@/lib/get-members-data"
 import { MembersData } from "./membersData"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 3600 // Revalidate data every hour (3600 seconds)
+
 export default async function Page() {
 	const members = await getMembersData()
 	return (
