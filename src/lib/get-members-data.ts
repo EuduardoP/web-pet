@@ -40,7 +40,6 @@ export async function getMembersData(): Promise<Member[]> {
 		const formatData = (data: Result[]): Member[] => {
 			return data.map((item) => {
 				const { properties } = item
-
 				return {
 					properties: {
 						id: properties["E-mail Notion"].id,

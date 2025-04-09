@@ -1,3 +1,4 @@
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Image from "next/image"
 
 export default function Page() {
@@ -19,12 +20,9 @@ export default function Page() {
 						professor tutor.
 					</p>
 				</div>
-				<Image
-					src="/all.jpg"
-					alt="Todos os membros do PET"
-					width={1840}
-					height={1035}
-				/>
+				<AspectRatio ratio={4 / 3}>
+					<Image src="/all.jpg" alt="Todos os membros do PET" fill />
+				</AspectRatio>
 			</main>
 		</>
 	)
